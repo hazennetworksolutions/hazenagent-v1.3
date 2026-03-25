@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Warden Agent - Advanced AI Assistant by Hazen Network Solutions. 40-60% cost savings with hybrid model system.">
+    <meta name="author" content="Hazen Network Solutions">
+    <title>Warden Agent | Hazen Network Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --indigo-400: #818cf8;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --purple-400: #a78bfa;
+            --purple-500: #8b5cf6;
+            --purple-600: #7c3aed;
+            --pink-400: #f472b6;
+            --emerald-500: #10b981;
+            --teal-600: #0d9488;
+            --cyan-500: #06b6d4;
+            --slate-900: #0f172a;
+            --slate-950: #020617;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom right, var(--slate-950), var(--slate-900), var(--slate-950));
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Animated background */
+        .bg-animated {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .bg-animated > div {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .bg-animated > div:nth-child(1) {
+            top: 25%;
+            left: -12rem;
+            width: 24rem;
+            height: 24rem;
+            background: var(--indigo-500);
+        }
+        
+        .bg-animated > div:nth-child(2) {
+            bottom: 25%;
+            right: -12rem;
+            width: 24rem;
+            height: 24rem;
+            background: var(--purple-500);
+            animation-delay: 1s;
+        }
+        
+        .bg-animated > div:nth-child(3) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24rem;
+            height: 24rem;
+            background: var(--cyan-500);
+            animation-delay: 2s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .container { padding: 0 1.5rem; }
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+            gap: 1rem;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-img {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.75rem;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3);
+            padding: 0.375rem;
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .brand h1 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+        
+        .brand p {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+        
+        nav {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            nav { display: flex; }
+        }
+        
+        nav a {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .theme-btn {
+            padding: 0.625rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: var(--emerald-500);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.95); }
+        }
+        
+        .status-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-300);
+        }
+        
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 4rem 0 5rem;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero { padding: 5rem 0; }
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--indigo-300);
+            backdrop-filter: blur(8px);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-badge svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h2 { font-size: 3.75rem; }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(to right, var(--indigo-400), var(--purple-400), var(--pink-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            max-width: 42rem;
+            margin: 0 auto 2.5rem;
+            font-weight: 500;
+            line-height: 1.75;
+        }
+        
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-badge-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--white);
+            transition: all 0.2s;
+        }
+        
+        .hero-badge-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-badge-item svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--indigo-400);
+        }
+        
+        /* Chat Section */
+        .chat-section {
+            flex: 1;
+            padding: 0 1rem 3rem;
+            max-width: 72rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @media (min-width: 1024px) {
+            .chat-section { padding: 0 1.5rem 3rem; }
+        }
+        
+        .chat-container {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 650px;
+        }
+        
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            scroll-behavior: smooth;
+        }
+        
+        @media (min-width: 1024px) {
+            .messages-container { padding: 2rem; }
+        }
+        
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .messages-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        
+        .welcome-screen {
+            text-align: center;
+            padding: 4rem 1rem;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        
+        .welcome-icon {
+            width: 5rem;
+            height: 5rem;
+            margin: 0 auto 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(to bottom right, var(--indigo-500), var(--purple-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .welcome-icon svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--white);
+        }
+        
+        .welcome-screen h3 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .welcome-screen p {
+            color: var(--gray-400);
+            margin-bottom: 2.5rem;
+            line-height: 1.75;
+            font-size: 1.125rem;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 640px) {
+            .quick-actions { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        .quick-action-btn {
+            position: relative;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .quick-action-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, var(--indigo-500), var(--cyan-500));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .quick-action-btn:hover::before {
+            opacity: 0.1;
+        }
+        
+        .quick-action-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-action-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: var(--indigo-400);
+            margin-bottom: 0.75rem;
+            transition: transform 0.3s;
+        }
+        
+        .quick-action-btn:hover .quick-action-icon {
+            transform: scale(1.1);
+        }
+        
+        .quick-action-label {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .quick-action-prompt {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(0.5rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .message.user .message-avatar {
+            background: linear-gradient(to bottom right, var(--indigo-500), var(--purple-600));
+            color: var(--white);
+        }
+        
+        .message.assistant .message-avatar {
+            background: linear-gradient(to bottom right, var(--emerald-500), var(--teal-600));
+            color: var(--white);
+        }
+        
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.875rem 1.25rem;
+            border-radius: 1rem;
+            line-height: 1.75;
+        }
+        
+        .message.user .message-bubble {
+            background: linear-gradient(to bottom right, var(--indigo-600), var(--indigo-700));
+            color: var(--white);
+            border-bottom-right-radius: 0.25rem;
+        }
+        
+        .message.assistant .message-bubble {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-100);
+            border-bottom-left-radius: 0.25rem;
+        }
+        
+        .message-content {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            line-height: 1.6;
+        }
+        
+        /* Long content optimization */
+        .message-content p {
+            margin: 0.875rem 0;
+            line-height: 1.7;
+        }
+        
+        .message-content p:first-child {
+            margin-top: 0;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Highlight important information */
+        .message-content strong {
+            color: var(--indigo-300);
+            font-weight: 600;
+        }
+        
+        .message-content em {
+            color: var(--purple-300);
+            font-style: italic;
+        }
+        
+        /* Blockquotes */
+        .message-content blockquote {
+            border-left: 4px solid var(--indigo-500);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            padding: 0.75rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 0.25rem;
+            font-style: italic;
+        }
+        
+        /* Horizontal rules */
+        .message-content hr {
+            border: none;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 1.5rem 0;
+        }
+        
+        /* Better spacing for sections */
+        .message-content > * + * {
+            margin-top: 0.5rem;
+        }
+        
+        /* Price/Number highlighting - handled in JavaScript */
+        
+        .message-content h1 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem 0;
+            color: var(--white);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .message-content h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem 0;
+            color: var(--indigo-400);
+        }
+        
+        .message-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem 0;
+            color: var(--purple-400);
+        }
+        
+        .message-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.5rem 0 0.5rem 0;
+            color: var(--gray-300);
+        }
+        
+        .message-content h1:first-child,
+        .message-content h2:first-child,
+        .message-content h3:first-child,
+        .message-content h4:first-child {
+            margin-top: 0;
+        }
+        
+        .message-content ul,
+        .message-content ol {
+            margin: 0.75rem 0;
+            padding-left: 1.75rem;
+            line-height: 1.8;
+        }
+        
+        .message-content ul {
+            list-style-type: disc;
+        }
+        
+        .message-content ol {
+            list-style-type: decimal;
+        }
+        
+        .message-content li {
+            margin: 0.5rem 0;
+            padding-left: 0.5rem;
+        }
+        
+        .message-content li::marker {
+            color: var(--indigo-400);
+        }
+        
+        /* Nested lists */
+        .message-content ul ul,
+        .message-content ol ol,
+        .message-content ul ol,
+        .message-content ol ul {
+            margin: 0.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .message-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            overflow-x: auto;
+            display: block;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .message-content table thead {
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .message-content table th {
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            font-weight: 600;
+            color: var(--white);
+            background: rgba(99, 102, 241, 0.15);
+        }
+        
+        .message-content table td {
+            padding: 0.625rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+        }
+        
+        .message-content table tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        .message-content table tbody tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-content table tbody tr:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .message-content pre {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 100%;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .message-content code {
+            background: rgba(99, 102, 241, 0.15);
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.875em;
+            word-break: break-word;
+            color: var(--indigo-300);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        .message-content pre code {
+            background: none;
+            padding: 0;
+            word-break: normal;
+            white-space: pre;
+        }
+        
+        /* Horizontal scroll for long code blocks */
+        .message-content pre {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Responsive message bubble for long content */
+        @media (max-width: 768px) {
+            .message-bubble {
+                max-width: 90%;
+            }
+            
+            .message-content pre {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.875rem 1.25rem;
+        }
+        
+        .typing-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: var(--gray-400);
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(-0.375rem);
+            }
+        }
+        
+        .input-section {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-form {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            padding: 0.75rem;
+            border-radius: 1rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+        
+        .input-form:focus-within {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+        }
+        
+        .input-textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            resize: none;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 0.938rem;
+            line-height: 1.75;
+            min-height: 1.5rem;
+            max-height: 7.5rem;
+        }
+        
+        .input-textarea::placeholder {
+            color: var(--gray-500);
+        }
+        
+        .send-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to right, var(--indigo-600), var(--purple-600));
+            color: var(--white);
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .send-btn:hover:not(:disabled) {
+            background: linear-gradient(to right, var(--indigo-500), var(--purple-500));
+            transform: translateY(-1px);
+        }
+        
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .send-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        /* Features */
+        .features-section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @media (min-width: 1024px) {
+            .features-section { padding: 6rem 0; }
+        }
+        
+        .features-title {
+            text-align: center;
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        @media (min-width: 1024px) {
+            .features-title { font-size: 3rem; }
+        }
+        
+        .features-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            margin-bottom: 3.5rem;
+            font-weight: 500;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (min-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        .feature-card {
+            position: relative;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--indigo-400);
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-description {
+            color: var(--gray-400);
+            line-height: 1.75;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        
+        .footer-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .footer-text {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            line-height: 1.75;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animated">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-img">
+                        <img src="/static/png-06.png" alt="HazenAgent Logo" onerror="this.style.display='none'">
+                    </div>
+                    <div class="brand">
+                        <h1>HazenAgent</h1>
+                        <p>by Hazen Network Solutions</p>
+                    </div>
+                </div>
+                
+                <nav>
+                    <a href="#chat">Chat</a>
+                    <a href="#features">Features</a>
+                    <a href="https://www.hazennetworksolutions.com" target="_blank" rel="noopener noreferrer">Company</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+                        <svg id="themeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="status-badge">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span class="status-text" id="statusText">Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                    <span>Powered by Advanced AI</span>
+                </div>
+                <h2>
+                    The fastest and most powerful<br>
+                    <span class="hero-gradient">AI platform for building products</span>
+                </h2>
+                <p>Build transformative AI experiences powered by industry-leading models and tools</p>
+                
+                <div class="hero-badges">
+                    <div class="hero-badge-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <span>Lightning Fast</span>
+                    </div>
+                    <div class="hero-badge-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        <span>40-60% Cost Savings</span>
+                    </div>
+                    <div class="hero-badge-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                        <span>Hybrid Model System</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="chat" class="chat-section">
+        <div class="chat-container">
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3>Welcome to HazenAgent</h3>
+                    <p>Start a conversation or try one of the quick actions below</p>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" data-prompt="Show me a Python code example">
+                            <div class="quick-action-content">
+                                <svg class="quick-action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                                <span class="quick-action-label">Code Example</span>
+                                <span class="quick-action-prompt">Show me a Python code example</span>
+                            </div>
+                        </button>
+                        <button class="quick-action-btn" data-prompt="What is the Bitcoin price?">
+                            <div class="quick-action-content">
+                                <svg class="quick-action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span class="quick-action-label">Crypto Price</span>
+                                <span class="quick-action-prompt">What is the Bitcoin price?</span>
+                            </div>
+                        </button>
+                        <button class="quick-action-btn" data-prompt="Explain artificial intelligence in simple terms">
+                            <div class="quick-action-content">
+                                <svg class="quick-action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="quick-action-label">Explain AI</span>
+                                <span class="quick-action-prompt">Explain artificial intelligence in simple terms</span>
+                            </div>
+                        </button>
+                        <button class="quick-action-btn" data-prompt="Latest technology news">
+                            <div class="quick-action-content">
+                                <svg class="quick-action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                                <span class="quick-action-label">Tech News</span>
+                                <span class="quick-action-prompt">Latest technology news</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <form class="input-form" id="chatForm">
+                    <textarea 
+                        class="input-textarea" 
+                        id="messageInput" 
+                        placeholder="Type your message... (Press Enter to send)"
+                        rows="1"
+                    ></textarea>
+                    <button type="submit" class="send-btn" id="sendBtn" disabled>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                        <span>Send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="features-title">Flagship Models</h2>
+            <p class="features-subtitle">Powerful general purpose models for a variety of real-world tasks with a refreshed knowledge cutoff</p>
+            
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h3 class="feature-title">Hybrid Model System</h3>
+                        <p class="feature-description">Optimizes both cost and quality with intelligent model selection, automatically choosing the most suitable AI model for each task.</p>
+                    </div>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h3 class="feature-title">Lightning Fast</h3>
+                        <p class="feature-description">With parallel processing and intelligent caching, delivers responses to simple queries in under 1 second for maximum performance.</p>
+                    </div>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <h3 class="feature-title">Cost Effective</h3>
+                        <p class="feature-description">Save 40-60% on AI costs compared to using premium models for all tasks through intelligent routing.</p>
+                    </div>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        <h3 class="feature-title">15+ Integrated Tools</h3>
+                        <p class="feature-description">Web search, crypto prices, translations, calculations, and more - all seamlessly integrated.</p>
+                    </div>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h3 class="feature-title">Real-time Analytics</h3>
+                        <p class="feature-description">Track performance, costs, and usage in real-time with comprehensive metrics dashboard.</p>
+                    </div>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-content">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                        <h3 class="feature-title">Secure & Private</h3>
+                        <p class="feature-description">Enterprise-grade security standards with session management and data protection.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 class="footer-title">HazenAgent</h4>
+                    <p class="footer-text">Advanced AI assistant powered by hybrid model technology. Developed using LangGraph framework.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.hazennetworksolutions.com" target="_blank" rel="noopener noreferrer">Hazen Network Solutions</a></li>
+                        <li><a href="https://www.hazennetworksolutions.com/about" target="_blank" rel="noopener noreferrer">About Us</a></li>
+                        <li><a href="https://www.hazennetworksolutions.com/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/docs">API Documentation</a></li>
+                        <li><a href="/health">Health Check</a></li>
+                        <li><a href="/v2/metrics">Metrics</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Technology</h4>
+                    <ul class="footer-links">
+                        <li>LangGraph Framework</li>
+                        <li>Gemini AI Models</li>
+                        <li>FastAPI Backend</li>
+                        <li>Real-time Streaming</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2025 Hazen Network Solutions. All rights reserved. | HazenAgent v2.0
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        class HazenAgentChat {
+            constructor() {
+                this.sessionId = localStorage.getItem('session_id') || 'session_' + Date.now();
+                localStorage.setItem('session_id', this.sessionId);
+                this.isProcessing = false;
+                this.currentMessageId = null;
+                this.scrollTimeout = null;  // For throttling scroll updates with long content
+                this.init();
+            }
+            
+            init() {
+                console.log('🚀 HazenAgent Chat initializing...');
+                
+                const input = document.getElementById('messageInput');
+                const sendBtn = document.getElementById('sendBtn');
+                const form = document.getElementById('chatForm');
+                const themeBtn = document.getElementById('themeBtn');
+                
+                if (!input || !sendBtn || !form) {
+                    console.error('❌ Required elements not found!');
+                    return;
+                }
+                
+                // Input handling
+                input.addEventListener('input', () => {
+                    const hasText = input.value.trim().length > 0;
+                    sendBtn.disabled = !hasText || this.isProcessing;
+                    this.autoResize(input);
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+                
+                // Form submission
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.sendMessage();
+                });
+                
+                // Quick action buttons
+                document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const prompt = btn.getAttribute('data-prompt');
+                        if (prompt) {
+                            input.value = prompt;
+                            sendBtn.disabled = false;
+                            this.sendMessage();
+                        }
+                    });
+                });
+                
+                // Theme toggle
+                if (themeBtn) {
+                    themeBtn.addEventListener('click', () => this.toggleTheme());
+                    this.initTheme();
+                }
+                
+                // Health check
+                this.checkHealth();
+                setInterval(() => this.checkHealth(), 30000);
+                
+                console.log('✅ HazenAgent Chat initialized');
+            }
+            
+            initTheme() {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : (prefersDark ? 'dark' : 'light');
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                this.updateThemeIcon(theme);
+            }
+            
+            toggleTheme() {
+                const isDark = document.documentElement.classList.contains('dark');
+                const newTheme = isDark ? 'light' : 'dark';
+                document.documentElement.classList.toggle('dark', newTheme === 'dark');
+                localStorage.setItem('theme', newTheme);
+                this.updateThemeIcon(newTheme);
+            }
+            
+            updateThemeIcon(theme) {
+                const icon = document.getElementById('themeIcon');
+                if (!icon) return;
+                
+                if (theme === 'dark') {
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 1.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+                } else {
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+                }
+            }
+            
+            autoResize(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+            }
+            
+            async checkHealth() {
+                try {
+                    const res = await fetch('/health');
+                    const data = await res.json();
+                    
+                    const statusDot = document.getElementById('statusDot');
+                    const statusText = document.getElementById('statusText');
+                    
+                    if (res.ok && statusDot && statusText) {
+                        statusDot.style.background = 'var(--emerald-500)';
+                        statusText.textContent = data.optimized_mode ? 'Online ⚡' : 'Online';
+                    } else if (statusDot && statusText) {
+                        statusDot.style.background = '#ef4444';
+                        statusText.textContent = 'Offline';
+                    }
+                } catch (error) {
+                    const statusDot = document.getElementById('statusDot');
+                    const statusText = document.getElementById('statusText');
+                    if (statusDot && statusText) {
+                        statusDot.style.background = '#fb923c';
+                        statusText.textContent = 'Demo Mode';
+                    }
+                }
+            }
+            
+            async sendMessage() {
+                const input = document.getElementById('messageInput');
+                const message = input.value.trim();
+                
+                if (!message || this.isProcessing) return;
+                
+                // Remove welcome screen
+                const welcomeScreen = document.getElementById('welcomeScreen');
+                if (welcomeScreen) welcomeScreen.remove();
+                
+                // Add user message
+                this.addMessage('user', message);
+                input.value = '';
+                this.autoResize(input);
+                
+                this.isProcessing = true;
+                const sendBtn = document.getElementById('sendBtn');
+                if (sendBtn) sendBtn.disabled = true;
+                
+                const typingId = this.showTyping();
+                
+                try {
+                    await this.streamResponse(message, typingId);
+                } catch (error) {
+                    console.error('❌ Error:', error);
+                    this.removeTyping(typingId);
+                    this.addMessage('assistant', '❌ Error: ' + (error.message || 'Connection failed. Please try again.'));
+                } finally {
+                    this.isProcessing = false;
+                    if (sendBtn) sendBtn.disabled = false;
+                }
+            }
+            
+            async streamResponse(message, typingId) {
+                const res = await fetch('/chat/stream', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        message, 
+                        session_id: this.sessionId 
+                    })
+                });
+                
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                
+                if (!res.body) {
+                    throw new Error('Response body is null');
+                }
+                
+                const reader = res.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let fullContent = '';
+                
+                this.removeTyping(typingId);
+                
+                try {
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        
+                        buffer += decoder.decode(value, { stream: true });
+                        const lines = buffer.split('\n');
+                        buffer = lines.pop() || '';
+                        
+                        for (const line of lines) {
+                            if (line.trim() === '') continue;
+                            
+                            if (line.startsWith('data: ')) {
+                                try {
+                                    const jsonData = line.slice(6).trim();
+                                    if (!jsonData) continue;
+                                    
+                                    const data = JSON.parse(jsonData);
+                                    
+                                    if (data.type === 'chunk' && data.content) {
+                                        fullContent += data.content;
+                                        if (!this.currentMessageId) {
+                                            this.currentMessageId = this.addMessage('assistant', fullContent);
+                                        } else {
+                                            this.updateMessage(this.currentMessageId, fullContent);
+                                        }
+                                    } else if (data.type === 'error') {
+                                        throw new Error(data.message || 'Server error');
+                                    }
+                                } catch (e) {
+                                    if (e instanceof SyntaxError) {
+                                        console.warn('⚠️ JSON parse error:', e);
+                                    } else {
+                                        throw e;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } finally {
+                    reader.releaseLock();
+                    this.currentMessageId = null;
+                }
+            }
+            
+            addMessage(role, content) {
+                const container = document.getElementById('messagesContainer');
+                if (!container) return null;
+                
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${role}`;
+                const id = 'msg_' + Date.now();
+                msgDiv.id = id;
+                
+                const avatarLetter = role === 'user' ? 'U' : 'W';
+                
+                msgDiv.innerHTML = `
+                    <div class="message-avatar">${avatarLetter}</div>
+                    <div class="message-bubble">
+                        <div class="message-content">${this.formatContent(content)}</div>
+                    </div>
+                `;
+                
+                container.appendChild(msgDiv);
+                // Delay scroll slightly to ensure DOM is updated
+                setTimeout(() => this.scrollToBottom(), 10);
+                
+                return id;
+            }
+            
+            updateMessage(id, content) {
+                const msg = document.getElementById(id);
+                if (msg) {
+                    const contentEl = msg.querySelector('.message-content');
+                    if (contentEl) {
+                        contentEl.innerHTML = this.formatContent(content);
+                        // Throttle scroll updates for better performance with long content
+                        if (!this.scrollTimeout) {
+                            this.scrollTimeout = setTimeout(() => {
+                                this.scrollToBottom();
+                                this.scrollTimeout = null;
+                            }, 100);
+                        }
+                    }
+                }
+            }
+            
+            scrollToBottom() {
+                const container = document.getElementById('messagesContainer');
+                if (container) {
+                    // Smooth scroll to bottom for better UX with long content
+                    container.scrollTo({
+                        top: container.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            showTyping() {
+                const container = document.getElementById('messagesContainer');
+                if (!container) return null;
+                
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator';
+                const id = 'typing_' + Date.now();
+                typingDiv.id = id;
+                
+                typingDiv.innerHTML = `
+                    <div class="message-avatar">W</div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                
+                container.appendChild(typingDiv);
+                this.scrollToBottom();
+                
+                return id;
+            }
+            
+            removeTyping(id) {
+                const elem = document.getElementById(id);
+                if (elem) elem.remove();
+            }
+            
+            scrollToBottom() {
+                const container = document.getElementById('messagesContainer');
+                if (container) {
+                    container.scrollTop = container.scrollHeight;
+                }
+            }
+            
+            formatContent(text) {
+                // Escape HTML first
+                let html = text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                
+                // Horizontal rules
+                html = html.replace(/^---$/gm, '<hr>');
+                html = html.replace(/^\*\*\*$/gm, '<hr>');
+                
+                // Headers (before code blocks to avoid conflicts)
+                html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+                html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+                html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+                html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+                
+                // Code blocks (preserve formatting) - must be before other processing
+                html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+                    const escapedCode = code.trim()
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                    const langClass = lang ? ` class="language-${lang}"` : '';
+                    return `<pre><code${langClass}>${escapedCode}</code></pre>`;
+                });
+                
+                // Blockquotes
+                html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+                
+                // Tables (markdown table format)
+                html = html.replace(/\|(.+)\|/g, (match, content) => {
+                    const cells = content.split('|').map(c => c.trim()).filter(c => c);
+                    if (cells.length > 0) {
+                        return '<tr>' + cells.map(cell => {
+                            // Check if it's a header row (contains ---)
+                            if (cell.includes('---')) return '';
+                            // Check if previous row was header
+                            const isHeader = match.includes('---');
+                            return isHeader ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+                        }).join('') + '</tr>';
+                    }
+                    return match;
+                });
+                
+                // Wrap table rows in table element
+                html = html.replace(/(<tr>.*<\/tr>\n?)+/g, (match) => {
+                    if (!match.includes('<table>')) {
+                        // Check if there's a header separator row
+                        const hasHeader = match.includes('---');
+                        if (hasHeader) {
+                            match = match.replace(/<tr>.*---.*<\/tr>/g, '');
+                            const rows = match.match(/<tr>.*?<\/tr>/g) || [];
+                            if (rows.length > 0) {
+                                const headerRow = rows[0];
+                                const bodyRows = rows.slice(1).join('');
+                                return `<table><thead>${headerRow}</thead><tbody>${bodyRows}</tbody></table>`;
+                            }
+                        }
+                        return `<table><tbody>${match}</tbody></table>`;
+                    }
+                    return match;
+                });
+                
+                // Remove separator rows
+                html = html.replace(/<tr>.*---.*<\/tr>/g, '');
+                
+                // Inline code (after code blocks to avoid conflicts)
+                html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+                
+                // Bold (must be before italic)
+                html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+                
+                // Italic (but not if it's part of bold)
+                html = html.replace(/(?<!\*)\*([^*\n]+?)\*(?!\*)/g, '<em>$1</em>');
+                html = html.replace(/(?<!_)_([^_\n]+?)_(?!_)/g, '<em>$1</em>');
+                
+                // Lists (unordered) - improved regex
+                html = html.replace(/^[\*\-\+] (.+)$/gm, '<li>$1</li>');
+                // Group consecutive list items
+                html = html.replace(/(<li>.*?<\/li>(?:\n|$))+/g, (match) => {
+                    if (!match.includes('<ul>')) {
+                        return '<ul>' + match + '</ul>';
+                    }
+                    return match;
+                });
+                
+                // Lists (ordered)
+                html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+                // Group consecutive ordered list items
+                html = html.replace(/(<li>.*?<\/li>(?:\n|$))+/g, (match) => {
+                    if (!match.includes('<ol>') && !match.includes('<ul>')) {
+                        // Check if previous context suggests ordered list
+                        const prevContext = html.substring(0, html.indexOf(match));
+                        const lastNumbered = prevContext.match(/\d+\./);
+                        if (lastNumbered) {
+                            return '<ol>' + match + '</ol>';
+                        }
+                    }
+                    return match;
+                });
+                
+                // Links (improved regex)
+                html = html.replace(/(https?:\/\/[^\s\)]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: var(--indigo-400); text-decoration: underline;">$1</a>');
+                
+                // Markdown links [text](url)
+                html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--indigo-400); text-decoration: underline;">$1</a>');
+                
+                // Paragraphs (group consecutive lines) - improved logic
+                const lines = html.split('\n');
+                let inCodeBlock = false;
+                let inList = false;
+                let inTable = false;
+                let paragraphBuffer = [];
+                let processedLines = [];
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    // Track code blocks
+                    if (line.includes('<pre>')) inCodeBlock = true;
+                    if (line.includes('</pre>')) inCodeBlock = false;
+                    
+                    // Track lists
+                    if (line.includes('<ul>') || line.includes('<ol>')) inList = true;
+                    if (line.includes('</ul>') || line.includes('</ol>')) inList = false;
+                    
+                    // Track tables
+                    if (line.includes('<table>')) inTable = true;
+                    if (line.includes('</table>')) inTable = false;
+                    
+                    // Skip empty lines
+                    if (!line) {
+                        // Flush paragraph buffer if exists
+                        if (paragraphBuffer.length > 0) {
+                            processedLines.push('<p>' + paragraphBuffer.join(' ') + '</p>');
+                            paragraphBuffer = [];
+                        }
+                        continue;
+                    }
+                    
+                    // Don't wrap if it's already a tag
+                    if (line.startsWith('<') || inCodeBlock || inList || inTable) {
+                        // Flush paragraph buffer first
+                        if (paragraphBuffer.length > 0) {
+                            processedLines.push('<p>' + paragraphBuffer.join(' ') + '</p>');
+                            paragraphBuffer = [];
+                        }
+                        processedLines.push(line);
+                        continue;
+                    }
+                    
+                    // Add to paragraph buffer
+                    paragraphBuffer.push(line);
+                }
+                
+                // Flush remaining paragraph buffer
+                if (paragraphBuffer.length > 0) {
+                    processedLines.push('<p>' + paragraphBuffer.join(' ') + '</p>');
+                }
+                
+                html = processedLines.join('\n');
+                
+                // Clean up empty paragraphs and extra whitespace
+                html = html.replace(/<p><\/p>/g, '');
+                html = html.replace(/<p>\s*<\/p>/g, '');
+                html = html.replace(/\n{3,}/g, '\n\n');
+                
+                // Final cleanup: ensure proper spacing between elements
+                html = html.replace(/<\/p>\s*<p>/g, '</p>\n<p>');
+                html = html.replace(/<\/h([1-4])>\s*<p>/g, '</h$1>\n<p>');
+                
+                // CRITICAL FIX: Highlight numbers and prices AFTER paragraph wrapping
+                // This prevents the paragraph logic from breaking span tags
+                
+                // Dollar amounts: $94,842.00 or $1.88T or $42.8B
+                html = html.replace(/\$(\d{1,3}(?:,\d{3})*(?:\.\d+)?(?:[KMBT])?)/g, '<span style="color: var(--emerald-400); font-weight: 600;">$$$1</span>');
+                
+                // Percentages: +2.3% or -1.5%
+                html = html.replace(/([+\-]?\d+\.?\d*)%/g, '<span style="color: var(--cyan-400); font-weight: 600;">$1%</span>');
+                
+                // Standalone large numbers with commas: 94,842
+                html = html.replace(/(?<!\$)(?<!\d)(\d{1,3}(?:,\d{3})+)(?!\d)/g, '<span style="color: var(--purple-300); font-weight: 500;">$1</span>');
+                
+                return html;
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.hazenAgentChat = new HazenAgentChat();
+            });
+        } else {
+            window.hazenAgentChat = new HazenAgentChat();
+        }
+    </script>
+</body>
+</html>
+

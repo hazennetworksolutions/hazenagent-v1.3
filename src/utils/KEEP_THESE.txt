@@ -1,0 +1,21 @@
+# KEEP - Essential utils
+logger.py
+model_factory.py
+cache.py
+settings.py (in config/)
+number_formatter.py
+
+# DELETE - Unused in minimal version
+hybrid_model_selector.py
+hybrid_strategy.py
+intent_cache.py
+intent_config.py
+intent_metrics.py
+advanced_model_selector.py
+conversation_memory.py
+entity_persistence.py
+prompt_optimizer.py (1922 lines!)
+context_compressor.py
+intelligent_cache.py
+memory_optimizer.py
+performance_monitor.py

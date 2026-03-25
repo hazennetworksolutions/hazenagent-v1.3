@@ -1,0 +1,80 @@
+# Warden Agent Hub - Requirements
+# Python 3.10+ required
+
+# Core LangGraph and LangChain
+langgraph>=0.2.0
+langgraph-cli>=0.1.0  # For LangGraph deployment
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0
+langchain-anthropic>=0.18.0
+langchain-google-genai>=2.0.0
+langchain-community>=0.3.0
+
+# Async HTTP clients
+aiohttp>=3.9.0
+httpx>=0.27.0
+
+# Caching
+cachetools>=5.3.0
+redis>=5.0.0
+hiredis>=2.2.0
+
+# Database (async)
+asyncpg>=0.29.0
+aiosqlite>=0.19.0
+
+# Web parsing (optional - for better search results)
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# FastAPI for deployment
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Environment and config
+python-dotenv>=1.0.0
+
+# Logging and monitoring
+structlog>=24.1.0
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
+httpx>=0.27.0  # For TestClient
+
+# Code quality
+black>=24.1.0
+ruff>=0.1.0
+mypy>=1.8.0
+
+# Utilities
+python-dateutil>=2.8.0
+pytz>=2024.1
+psutil>=5.9.0  # For memory management
+
+# PDF Processing (optional - for PDF tools)
+PyPDF2>=3.0.0  # PDF text extraction
+pdfplumber>=0.10.0  # Alternative PDF library (better for complex PDFs)
+
+# LLM Providers - UPDATED 2024
+langchain-openai>=0.2.0  # For OpenAI GPT-4o, GPT-4o-mini, o1-preview
+langchain-anthropic>=0.3.0  # For Claude 3.5 Sonnet, Claude 3 Haiku
+langchain-google-genai>=2.0.0  # For Gemini 2.5 models
+
+# Optimization packages
+lz4>=4.3.0  # For ultra-fast compression
+scikit-learn>=1.3.0  # For similarity matching in cache
+numpy>=1.24.0  # For vector operations
+websockets>=12.0  # For WebSocket support
+
+# Web3 / On-chain
+web3>=7.0.0
+
+# Optional: For advanced features
+# langsmith>=0.1.0  # For LangSmith deployment
+anthropic>=0.18.0  # For Claude Haiku (intent classification)
+

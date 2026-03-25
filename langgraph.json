@@ -1,0 +1,25 @@
+{
+  "dependencies": [
+    ".",
+    "langchain",
+    "langchain-anthropic",
+    "langchain-openai",
+    "langchain-google-genai",
+    "langchain-core",
+    "langgraph",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "aiohttp",
+    "cachetools"
+  ],
+  "graphs": {
+    "hazenagent": "./src/agent/graph.py:get_agent"
+  },
+  "env": ".env",
+  "python_version": "3.10",
+  "dockerfile_lines": [],
+  "port": 8000,
+  "host": "0.0.0.0"
+}
+

@@ -1,0 +1,16 @@
+# ESSENTIAL (Kullanılıyor):
+logger.py
+model_factory.py
+
+# POTENTIALLY NEEDED (API için):
+performance.py
+http_pool.py
+memory_manager.py
+validation.py
+rate_limiter.py
+request_tracker.py
+user_preferences.py
+cost_tracker.py
+
+# CHECK (API'de kullanılıyor mu?):
+Kontrol etmeliyiz...
